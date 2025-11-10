@@ -1,0 +1,175 @@
+:root{
+  --bg:#ffffff;
+  --text:#0f172a;
+  --muted:#475569;
+  --panel:#f8fafc;
+  --border:#e2e8f0;
+  --accent:#0ea5e9;      /* sky blue */
+  --accent-dark:#0284c7;
+  --radius:14px;
+  --tap:44px;            /* min tap target */
+}
+
+/* Base */
+*{ box-sizing:border-box }
+html{ scroll-behavior:smooth }
+body{
+  margin:0;
+  font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+  -webkit-text-size-adjust:100%;
+}
+img{ max-width:100%; height:auto; display:block }
+.container{ width:min(1000px,92%); margin-inline:auto }
+
+/* Accessibility helpers */
+.skip-link{
+  position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;
+}
+.skip-link:focus{
+  position:fixed; left:1rem; top:1rem; width:auto; height:auto; padding:.5rem .75rem; background:#fff; border:1px solid var(--border); z-index:1000;
+}
+
+/* Header / Nav */
+.topbar{
+  position:sticky; top:0; background:rgba(255,255,255,0.92);
+  backdrop-filter:saturate(180%) blur(8px);
+  border-bottom:1px solid var(--border); z-index:50;
+}
+.nav{ display:flex; align-items:center; gap:.5rem; padding:.5rem 0 }
+.brand{ font-weight:700; color:var(--text); text-decoration:none; font-size:1.1rem }
+
+/* Hamburger */
+.icon-btn{
+  margin-left:auto;
+  width:var(--tap); height:var(--tap);
+  border:1px solid var(--border);
+  background:#fff; border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+}
+.icon-btn .bar{
+  width:20px; height:2px; background:var(--text); display:block; position:relative;
+}
+.icon-btn .bar + .bar{ margin-top:4px }
+
+/* Collapsible nav for mobile */
+.nav-links{
+  position:fixed; inset:auto 0 0 0; top:56px;
+  background:#fff; border-top:1px solid var(--border);
+  display:none; flex-direction:column; gap:.25rem; padding:.75rem;
+}
+.nav-links a, .nav-links .btn{
+  padding:.8rem 1rem; border-radius:10px; text-decoration:none; color:var(--text);
+  border:1px solid transparent;
+}
+.nav-links a:active{ background:var(--panel) }
+.nav-open .nav-links{ display:flex }
+
+/* Desktop nav */
+@media (min-width: 900px){
+  .icon-btn{ display:none }
+  .nav-links{
+    position:static; display:flex; flex-direction:row; gap:.5rem; padding:0; background:transparent; border:none;
+  }
+  .nav-links a{ padding:.6rem .75rem }
+}
+
+/* Buttons */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-height:var(--tap); padding:.6rem .9rem;
+  border-radius:10px; border:1px solid var(--border);
+  background:#fff; color:var(--text); text-decoration:none; cursor:pointer;
+}
+.btn.primary{ background:linear-gradient(90deg, var(--accent), var(--accent-dark)); color:#fff; border:none }
+.btn.outline{ background:transparent; border:1px solid var(--border); color:var(--text) }
+.btn:active{ transform:translateY(1px) }
+
+/* Sections */
+.section{ padding:2rem 0 }
+h1{ font-size:clamp(1.6rem, 5vw, 2.5rem); margin:.4rem 0 }
+h2{ font-size:clamp(1.25rem, 3.5vw, 1.75rem); margin:0 0 .9rem }
+.lead{ color:var(--muted); font-size:1rem }
+
+/* Hero */
+.hero{ display:grid; grid-template-columns:1fr; gap:1rem; align-items:center; }
+.hero-text .quick-list{ list-style:none; padding:0; margin:.75rem 0; display:flex; gap:.5rem; flex-wrap:wrap; color:var(--muted) }
+.hero-actions{ display:flex; gap:.6rem; margin-top:.5rem }
+.hero-photo img{ border-radius:var(--radius); border:1px solid var(--border) }
+
+/* Two-column at larger screens */
+@media (min-width: 900px){
+  .hero{ grid-template-columns:1.2fr 1fr; gap:2rem; padding:2rem 0 }
+}
+
+/* Details lists */
+.details-grid{ display:grid; grid-template-columns:1fr; gap:.75rem }
+@media (min-width: 720px){
+  .details-grid{ grid-template-columns:1fr 1fr }
+}
+.list{
+  list-style:none; padding:0; margin:0;
+  background:var(--panel); border:1px solid var(--border); border-radius:12px; overflow:hidden
+}
+.list li{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:.75rem .9rem; border-bottom:1px solid var(--border); gap:.75rem;
+}
+.list li:last-child{ border-bottom:none }
+.list span{ color:var(--muted) }
+.note{ color:var(--muted); margin-top:.6rem; font-size:.9rem }
+
+/* Cards */
+.cards{ display:grid; grid-template-columns:1fr; gap:.75rem }
+@media (min-width: 720px){
+  .cards{ grid-template-columns:repeat(3, 1fr) }
+}
+.card{ background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:1rem }
+
+/* Tags */
+.tags{ display:flex; gap:.5rem; flex-wrap:wrap }
+.tags span{
+  background:var(--panel); border:1px solid var(--border);
+  padding:.5rem .75rem; border-radius:999px;
+}
+
+/* Gallery */
+.gallery{ display:grid; grid-template-columns:repeat(2, 1fr); gap:.6rem }
+@media (min-width: 900px){
+  .gallery{ grid-template-columns:repeat(3, 1fr) }
+}
+.gallery img{ border-radius:12px; border:1px solid var(--border) }
+
+/* Values */
+.values-grid{ display:grid; grid-template-columns:1fr; gap:.75rem }
+@media (min-width: 720px){
+  .values-grid{ grid-template-columns:1fr 1fr }
+}
+.value{ background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:1rem }
+.value ul{ margin:.25rem 0 0; padding-left:1rem }
+
+/* Contact */
+.contact{ list-style:none; padding:0; display:flex; gap:.75rem; flex-wrap:wrap }
+.contact a{ color:var(--accent-dark); text-decoration:none; padding:.5rem .75rem; border-radius:10px; border:1px solid var(--border); background:#fff; min-height:var(--tap); display:inline-flex; align-items:center }
+.contact a:active{ background:var(--panel) }
+
+/* Footer */
+.footer{ border-top:1px solid var(--border); padding:1rem 0; margin-top:1rem }
+.footer-inner{ display:flex; flex-direction:column; gap:.25rem; color:var(--muted) }
+@media (min-width: 720px){
+  .footer-inner{ flex-direction:row; align-items:center; justify-content:space-between }
+}
+
+/* Motion reduction */
+@media (prefers-reduced-motion: reduce){
+  *{ animation:none !important; transition:none !important; scroll-behavior:auto !important }
+}
+
+/* Print to PDF (A4 friendly) */
+@media print {
+  .topbar, .hero-actions, #waShare, #menuToggle { display:none !important }
+  body{ background:#fff; color:#000; font-size:12pt }
+  .card, .list, .value{ break-inside:avoid }
+  a{ color:#000; text-decoration:none }
